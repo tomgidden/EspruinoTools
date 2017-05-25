@@ -261,7 +261,7 @@ function terminal(port, exitCallback) {
   if (!args.quiet) log("Connecting to '"+port+"'");
   var hadCtrlC = false;
   var hadCR = false;
-  process.stdin.setRawMode(true);
+  if (process.stdin.setRawMode) process.stdin.setRawMode(true);
   Espruino.Core.Serial.startListening(function(data) {
     data = new Uint8Array(data);
     process.stdout.write(String.fromCharCode.apply(null, data));
